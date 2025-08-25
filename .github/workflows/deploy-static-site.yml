@@ -11,9 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the repository code
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      # Step 2: Prepare static files for deployment
+      # This step ensures all HTML, CSS, and JavaScript files are organized in the 'build' directory
       - name: Prepare Static Files
         run: |
           mkdir -p build
@@ -25,9 +28,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the repository code again
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      # Step 2: Deploy the static site to GitHub Pages
+      # This step uses the peaceiris/actions-gh-pages action to publish the 'build' directory to the 'gh-pages' branch
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
