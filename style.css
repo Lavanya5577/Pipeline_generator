@@ -1,161 +1,236 @@
-/* ========== CSS RESET ========== */
-*,
-*::before,
-*::after {
+:root {
+  --bg: #0b0f17;
+  --panel: #121827;
+  --text: #e6edf3;
+  --muted: #9aa4b2;
+  --accent: #4f46e5;
+  --accent-2: #22c55e;
+  --border: #1f2937;
+  --shadow: 0 2px 8px rgba(0,0,0,0.13);
+}
+ 
+/* Reset and base styles */
+* {
   box-sizing: border-box;
+}
+ 
+html, body {
   margin: 0;
   padding: 0;
 }
  
 body {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.6;
-  color: #e6edf3;
-  background-color: #0b0f17;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  min-height: 100vh;
 }
  
-/* ========== GLOBAL ========== */
 .container {
-  width: 90%;
-  max-width: 960px;
+  width: min(1000px, 94vw);
   margin: 0 auto;
+  padding: 2rem 1.2rem 1.2rem 1.2rem;
 }
  
-a {
-  color: #4f46e5;
-  text-decoration: none;
-}
- 
-a:hover {
-  text-decoration: underline;
-}
- 
-.btn {
-  display: inline-block;
-  padding: 0.6rem 1.2rem;
-  background-color: #4f46e5;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.2s ease;
-}
- 
-.btn:hover {
-  background-color: #3730a3;
-}
- 
-.muted {
-  color: #9aa4b2;
-  font-size: 0.9rem;
-}
- 
-/* ========== HEADER ========== */
+/* Header and Navigation */
 .site-header {
-  background-color: #121827;
-  border-bottom: 1px solid #1f2937;
-  padding: 1rem 0;
-  margin-bottom: 2rem;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0 0.75rem 0;
+  margin-bottom: 2.3rem;
+  box-shadow: var(--shadow);
 }
  
-.site-header .logo {
-  font-size: 1.4rem;
+.logo {
+  margin: 0;
+  font-size: 1.6rem;
   font-weight: bold;
+  letter-spacing: 0.04em;
 }
  
 .nav {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
  
 .nav a {
-  color: #e6edf3;
-  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: background 0.2s, color 0.2s;
 }
  
-.nav a.active {
-  color: #22c55e;
+.nav a.active, .nav a:focus, .nav a:hover {
+  color: var(--text);
+  background: #23293f;
+  outline: none;
 }
  
-/* Flex header */
-.site-header .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
- 
-/* ========== HERO ========== */
+/* Hero section (index) */
 .hero {
-  text-align: center;
-  margin-bottom: 3rem;
+  padding: 2rem 0 1.5rem 0;
 }
  
 .hero h2 {
   font-size: 2rem;
-  margin-bottom: 0.5rem;
+  font-weight: 700;
+  margin-bottom: 1.3rem;
 }
  
-/* ========== CARDS ========== */
+.btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: .8rem 1.3rem;
+  border-radius: .7rem;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  transition: filter 0.17s, box-shadow 0.17s, transform 0.17s;
+}
+ 
+.btn:hover, .btn:focus {
+  filter: brightness(1.17);
+  box-shadow: 0 4px 15px #4f46e544;
+  transform: translateY(-2px) scale(1.02);
+  outline: none;
+}
+ 
+.muted {
+  color: var(--muted);
+}
+ 
+/* Card Grid Styles (index) */
 .card-grid {
   display: grid;
+  gap: 1.2rem;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 3rem;
+  margin: 2rem 0 1.5rem 0;
 }
  
 .card {
-  background-color: #121827;
-  border: 1px solid #1f2937;
-  border-radius: 10px;
-  padding: 1.5rem;
-  text-align: center;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: .9rem;
+  padding: 1.2rem 1rem;
+  box-shadow: 0 1px 5px #161b2c33;
+  font-size: 1.05rem;
 }
  
-.card:hover {
-  transform: translateY(-4px);
-  border-color: #4f46e5;
-}
- 
-/* ========== CONTACT FORM ========== */
-.contact {
-  margin-bottom: 3rem;
-}
- 
+/* Contact Form Styles (index) */
 .contact form {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: .9rem;
+  padding: 1.7rem 1.3rem 1.2rem 1.3rem;
+  margin-top: 1.1rem;
+  box-shadow: 0 1px 8px #161b2c44;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
  
-.contact label {
-  display: flex;
-  flex-direction: column;
+label {
+  display: block;
+  margin-bottom: .2rem;
   font-weight: 500;
-  gap: 0.4rem;
+  color: var(--muted);
+  font-size: 1rem;
 }
  
-.contact input,
-.contact textarea {
-  padding: 0.6rem;
-  border-radius: 6px;
-  border: 1px solid #1f2937;
-  background-color: #0f172a;
-  color: #e6edf3;
+input, textarea {
+  width: 100%;
+  background: #151c29;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: .5rem;
+  padding: .75rem .7rem;
+  font-size: 1rem;
+  margin-top: 0.2rem;
+  transition: border .14s;
 }
  
-.contact input:focus,
-.contact textarea:focus {
-  border-color: #4f46e5;
+input:focus, textarea:focus {
+  border: 1.5px solid var(--accent);
   outline: none;
+  background: #181f31;
 }
  
-/* ========== FOOTER ========== */
-.site-footer {
-  background-color: #121827;
-  border-top: 1px solid #1f2937;
-  padding: 1rem 0;
-  text-align: center;
-  font-size: 0.9rem;
+/* Prose section (about) */
+.prose {
+  background: var(--panel);
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px #161b2c44;
+  border: 1px solid var(--border);
+  padding: 2.1rem 1.5rem 2rem 1.5rem;
 }
+ 
+.prose h2 {
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin: 0 0 1.1rem 0;
+  color: var(--text);
+}
+ 
+.prose p {
+  margin: 0 0 1rem 0;
+}
+ 
+.prose ul {
+  margin: 0 0 1.35rem 1.2rem;
+  padding-left: 1.5rem;
+}
+ 
+.prose li {
+  margin-bottom: 0.6rem;
+  font-size: 1.08rem;
+  position: relative;
+}
+ 
+.prose li:before {
+  content: "•";
+  color: var(--accent-2);
+  font-weight: bold;
+  margin-right: 0.6em;
+}
+ 
+.prose a {
+  color: var(--accent-2);
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.18s;
+}
+ 
+.prose a:hover {
+  color: var(--accent);
+  text-decoration: underline dotted;
+}
+ 
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 2.2rem;
+  padding: 1.3rem 0 1rem 0;
+  color: var(--muted);
+  text-align: center;
+  font-size: 1rem;
+}
+ 
+/* Responsive */
+@media (max-width: 650px) {
+  .container, .prose {
+    padding: 1rem 0.5rem 1rem 0.5rem;
+  }
+  .site-header {
+    padding: 0.7rem 0 0.5rem 0;
+  }
+  .prose h2 {
+    font-size: 1.4rem;
+  }
+}
+ 
