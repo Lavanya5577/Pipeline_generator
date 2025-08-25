@@ -1,0 +1,35 @@
+name: Static Site CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  link-checker:
+    name: Link Checker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Install link-checker tool
+        run: npm install -g link-checker
+      - name: Validate hyperlinks
+        run: link-checker ./index.html
+
+  deploy:
+    name: Deployment
+    runs-on: ubuntu-latest
+    needs: link-checker
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./Pipeline_generator-main
