@@ -1,0 +1,43 @@
+# GitHub Actions Pipeline for HTML, CSS, and JavaScript Projects
+# This pipeline includes two steps: Link Checker and Deployment to GitHub Pages.
+
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  link-checker:
+    name: Link Checker
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Install link-checker tool
+      - name: Install Link Checker
+        run: npm install -g link-checker
+
+      # Step 3: Run link-checker on HTML files
+      - name: Run Link Checker
+        run: link-checker ./ --file-types html
+
+  deploy:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./  # Specify the directory to deploy
