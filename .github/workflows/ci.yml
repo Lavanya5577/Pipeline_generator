@@ -1,0 +1,49 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout Code
+      - name: Checkout Code
+        # Fetch the repository code from GitHub
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        # Set up the Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      # Step 3: Install Dependencies
+      - name: Install Dependencies
+        # Install project dependencies
+        run: npm install
+
+      # Step 4: Run Tests
+      - name: Run Tests
+        # Execute the test suite
+        run: npm test
+
+      # Step 5: Build Static Site
+      - name: Build Static Site
+        # Build the static site for deployment
+        run: npm run build
+
+      # Step 6: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        # Deploy the built static site to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
