@@ -1,0 +1,28 @@
+name: Deploy Static Site
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: |
+          npm install
+
+      - name: Build Static Site
+        run: |
+          npm run build
+
+      - name: Deploy to Hosting Platform
+        env:
+          HOSTING_PLATFORM_API_KEY: ${{ secrets.HOSTING_PLATFORM_API_KEY }}
+        run: |
+          npx hosting-cli deploy --api-key $HOSTING_PLATFORM_API_KEY --source ./build
