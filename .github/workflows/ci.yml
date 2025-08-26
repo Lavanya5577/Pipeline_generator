@@ -1,0 +1,70 @@
+name: CI/CD Pipeline for Static Site
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build Static Site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the static site
+        run: npm run build
+        # Replace 'npm run build' with the specific build command for your static site generator or framework.
+
+  test:
+    name: Test Static Site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint JavaScript
+        run: npm run lint
+        # Replace 'npm run lint' with the specific linting command for your project.
+
+      - name: Lint CSS
+        run: stylelint "**/*.css"
+        # Ensure stylelint is installed and configured in your project.
+
+      - name: Lint HTML
+        run: htmlhint .
+        # Ensure htmlhint is installed and configured in your project.
+
+      # Optional: Add visual regression testing steps here if needed.
+
+  deploy:
+    name: Deploy Static Site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+        # Replace './public' with the directory containing your built static site.
+        # Alternatively, use deployment steps for Netlify or AWS S3 as per your hosting platform.
